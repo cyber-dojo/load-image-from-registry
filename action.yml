@@ -22,7 +22,6 @@ runs:
         role-session-name: ${{ github.event.repository.name }}
 
     - name: Login to Amazon ECR
-      shell: bash
       uses: aws-actions/amazon-ecr-login@v2
 
     - name: Pull the docker image
