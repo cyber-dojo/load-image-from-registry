@@ -1,0 +1,29 @@
+name: Begin Kosli Trail
+description: ''
+
+inputs:
+  cli_version:
+    description: "The version of the Kosli CLI to use"
+    required: true
+
+  flow_description:
+    description: "The description of the Flow in which the Trail is beginning"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::244531986313:role/gh_actions_services
+        aws-region: eu-central-1
+        role-duration-seconds: 2400
+        role-session-name: ${{ github.event.repository.name }}
+
+    - name: Login to Amazon ECR
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Pull the docker image
+      run:
+        docker pull --platform=linux/amd64 "${IMAGE_NAME}"
