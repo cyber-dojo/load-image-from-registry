@@ -16,16 +16,16 @@ jobs:
     permissions:
       id-token: write
       contents: write
-    env:
-      IMAGE_NAME: ${{ needs.build-image.outputs.tagged_image_name }}
     steps:
       ...
       - name: Load image from registry
         uses: cyber-dojo/load-image-from-registry@main
+        with:
+          image_name: ${{ needs.build-image.outputs.tagged_image_name }}
 
       - name: Do something with image
         run:
-          ... "${IMAGE_NAME}" ...
+          ...
 
 ...
 ```

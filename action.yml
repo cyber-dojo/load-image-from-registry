@@ -2,12 +2,8 @@ name: Load image from registry
 description: ''
 
 inputs:
-  cli_version:
-    description: "The version of the Kosli CLI to use"
-    required: true
-
-  flow_description:
-    description: "The description of the Flow in which the Trail is beginning"
+  image_name:
+    description: "Docker image name, eg ghcr.io/cyber-dojo/saver:9a88d8f"
     required: true
 
 runs:
@@ -27,4 +23,4 @@ runs:
     - name: Pull the docker image
       shell: bash
       run:
-        docker pull --platform=linux/amd64 "${IMAGE_NAME}"
+        docker pull --platform=linux/amd64 "${ inputs.image_name }"
