@@ -23,4 +23,4 @@ runs:
     - name: Pull the docker image
       shell: bash
       run:
-        docker pull --platform=linux/amd64 "${ inputs.image_name }"
+        docker pull --platform=linux/amd64 "${{ inputs.image_name }}"
