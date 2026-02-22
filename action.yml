@@ -5,6 +5,11 @@ inputs:
   image_name:
     description: "Docker image name, eg ghcr.io/cyber-dojo/saver:9a88d8f"
     required: true
+  aws_rolename:
+    description: "Role to assume when configuring aws credentials"
+    required: false
+    default: "gh_actions_services"
+
 
 runs:
   using: "composite"
@@ -12,7 +17,7 @@ runs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::244531986313:role/gh_actions_services
+        role-to-assume: arn:aws:iam::244531986313:role/${{ inputs.aws_rolename }}
         aws-region: eu-central-1
         role-duration-seconds: 2400
         role-session-name: ${{ github.event.repository.name }}
